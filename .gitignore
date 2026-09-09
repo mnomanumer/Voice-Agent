@@ -13,3 +13,4 @@ credentials.json
 secrets.json
 *.db
 demo.db
+AGENT_PLAYBOOK.md

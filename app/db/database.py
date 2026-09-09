@@ -16,11 +16,7 @@ def get_engine():
             poolclass=StaticPool,
         )
     else:
-        # Force IPv4 for PostgreSQL connections
-        engine = create_engine(
-            database_url,
-            connect_args={"family": socket.AF_INET}
-        )
+        engine = create_engine(database_url)
     
     return engine
 

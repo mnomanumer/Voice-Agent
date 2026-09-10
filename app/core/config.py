@@ -39,7 +39,9 @@ class Settings(BaseSettings):
             # Local SQLite for development
             return f"sqlite:///./demo.db"
         
-        return f"postgresql://{self.db_user}:{escaped_password}@{self.db_host}:{self.db_port}/{self.db_name}"
+        # Use pooler.supabase.com with URL-encoded password for Python 3.13 + psycopg3
+        # This avoids IPv6 resolution issues with direct db.hostname.supabase.co
+        return f"postgresql+psycopg://{self.db_user}:{escaped_password}@aws-0-us-east-1.pooler.supabase.com:6543/{self.db_name}?statement_timeout=60000"
 
 
 settings = Settings()

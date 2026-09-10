@@ -16,7 +16,8 @@ def get_engine():
             poolclass=StaticPool,
         )
     else:
-        engine = create_engine(database_url)
+        # Force IPv4 to avoid Railway's IPv6 network unreachable issue
+        engine = create_engine(database_url, connect_args={"family": socket.AF_INET})
     
     return engine
 
